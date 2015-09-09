@@ -1,5 +1,6 @@
 requires 'perl', '5.008001';
 
+requires 'Class::Accessor::Lite';
 requires 'Data::Monad';
 requires 'Sub::Install';
 

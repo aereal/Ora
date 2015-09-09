@@ -6,6 +6,19 @@ use warnings;
 use Exporter 'import';
 use Sub::Install;
 
+use Class::Accessor::Lite (
+  new   => 1,
+  ro => [
+    'name',           # 'Str',
+    'type',           # 'Str',
+    'resolver',       # 'CodeRef',
+    'relation_class', # 'Class',
+    'target_class',   # 'Class',
+    'unit',           # 'CodeRef',
+    'empty',          # 'CodeRef',
+  ],
+);
+
 use Ora::Relation::HasA;
 use Ora::Relation::HasMany;
 
@@ -37,54 +50,7 @@ sub has_many {
   $relation->install;
 }
 
-# Class methods
-
-sub new {
-  my ($class, %args) = @_;
-  return bless \%args, $class;
-}
-
 # Instance methods
-
-# CodeRef
-sub empty {
-  my ($self) = @_;
-  return $self->{empty};
-}
-
-sub unit {
-  my ($self) = @_;
-  return $self->{unit};
-}
-
-# Str
-sub type {
-  my ($self) = @_;
-  return $self->{type};
-}
-
-# Str
-sub name {
-  my ($self) = @_;
-  return $self->{name};
-}
-
-# CodeRef
-sub resolver {
-  my ($self) = @_;
-  return $self->{resolver};
-}
-
-# Class
-sub relation_class {
-  my ($self) = @_;
-  return $self->{relation_class};
-}
-
-sub target_class {
-  my ($self) = @_;
-  return $self->{target_class};
-}
 
 # CodeRef
 sub method {
