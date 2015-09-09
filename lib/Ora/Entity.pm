@@ -3,15 +3,14 @@ package Ora::Entity;
 use strict;
 use warnings;
 
+use Class::Accessor::Lite (
+  new => 1,
+);
+
 sub relations {
   my ($class) = @_;
   no strict 'refs';
   return ${"$class\::RELATIONS"} //= {};
-}
-
-sub new {
-  my ($class, %args) = @_;
-  return bless \%args, $class;
 }
 
 sub resolve {
