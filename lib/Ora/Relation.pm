@@ -56,16 +56,16 @@ sub has_many {
 sub method {
   my ($relation) = @_;
   return sub {
-    my ($o) = @_;
-    if (!$o->has_resolved($relation->name)) {
-      if ($o->should_resolve) {
-        $o->{$relation->name} = $relation->unit->($relation->resolver->($o));
-        $o->resolve_relation($relation->name);
+    my ($entity) = @_;
+    if (!$entity->has_resolved($relation->name)) {
+      if ($entity->should_resolve) {
+        $entity->{$relation->name} = $relation->unit->($relation->resolver->($entity));
+        $entity->resolve_relation($relation->name);
       } else {
-        $o->{$relation->name} //= $relation->empty->();
+        $entity->{$relation->name} //= $relation->empty->();
       }
     }
-    return $o->{$relation->name};
+    return $entity->{$relation->name};
   };
 }
 
