@@ -14,7 +14,7 @@ sub db {
 
 sub find {
   my ($self, @args) = @_;
-  my $row = $self->db->find($self->table, @args);
+  my $row = $self->db->find($self->table, ['*'], @args);
   return $row ? $self->entity_builder->($row) : undef;
 }
 
