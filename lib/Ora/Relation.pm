@@ -55,12 +55,13 @@ sub has_many {
 # CodeRef
 sub method {
   my ($relation) = @_;
+  my $resolved = {};
   return sub {
     my ($entity) = @_;
-    if (!$entity->has_resolved($relation->name)) {
+    if (!$resolved->{$relation->name}) {
       if ($entity->should_resolve) {
         $entity->{$relation->name} = $relation->unit->($relation->resolver->($entity));
-        $entity->resolve_relation($relation->name);
+        $resolved->{$relation->name} = 1;
       } else {
         $entity->{$relation->name} //= $relation->empty->();
       }
