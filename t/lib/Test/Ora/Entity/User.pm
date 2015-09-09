@@ -8,15 +8,16 @@ use parent 'Ora::Entity';
 use Class::Accessor::Lite (
   new => 1,
   ro => [
+    'user_id', # Int
     'name', # 'Str',
   ]
 );
 
 use Ora::Relation;
 
-has_many posts => 't::Post' => sub {
+has_many blogs => 'Test::Ora::Entity::Blog' => sub {
   my ($user) = @_;
-  return map { Test::Ora::Entity::Post->new(post_id => $_, author_name => $user->name) } (1..5);
+  return map { Test::Ora::Entity::Blog->new(blog_id => $_, author_id => $user->user_id) } (1..5);
 };
 
 1;
