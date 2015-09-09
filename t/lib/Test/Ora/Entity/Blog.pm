@@ -18,7 +18,8 @@ use Ora::Relation;
 
 has_many posts => 'Test::Ora::Entity::Post' => sub {
   my ($blog) = @_;
-  return map { Test::Ora::Entity::Post->new(post_id => $_, blog_id => $blog->blog_id) } (1..5);
+  require Test::Ora::Repository::Post;
+  Test::Ora::Repository::Post->new->search_by_blog($blog);
 };
 
 1;

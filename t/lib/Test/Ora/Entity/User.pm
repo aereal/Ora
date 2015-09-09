@@ -17,7 +17,8 @@ use Ora::Relation;
 
 has_many blogs => 'Test::Ora::Entity::Blog' => sub {
   my ($user) = @_;
-  return map { Test::Ora::Entity::Blog->new(blog_id => $_, author_id => $user->user_id) } (1..5);
+  require Test::Ora::Repository::Blog;
+  return Test::Ora::Repository::Blog->new->search_by_owner($user);
 };
 
 1;

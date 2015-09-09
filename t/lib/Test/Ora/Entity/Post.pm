@@ -15,9 +15,10 @@ use Class::Accessor::Lite (
 
 use Ora::Relation;
 
-has_a 'author' => 'Test::Ora::Entity::User' => sub {
+has_a author => 'Test::Ora::Entity::User' => sub {
   my ($post) = @_;
-  return Test::Ora::Entity::User->new(name => 'user_' . $post->post_id, user_id => $post->post_id);
+  require Test::Ora::Repository::User;
+  return Test::Ora::Repository::User->new->find({ user_id => $post->author_id });
 };
 
 1;
