@@ -1,0 +1,22 @@
+CREATE TABLE `user` (
+  `user_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB CHARSET=utf8mb4;
+
+CREATE TABLE `blog` (
+  `blog_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `owner_id` BIGINT UNSIGNED NOT NULL, -- user
+
+  PRIMARY KEY (`blog_id`)
+) ENGINE=InnoDB CHARSET=utf8mb4;
+
+CREATE TABLE `post` (
+  `post_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `owner_blog_id` BIGINT UNSIGNED NOT NULL, -- blog
+  `author_id` BIGINT UNSIGNED NOT NULL, -- user
+  `body` VARCHAR(255) NOT NULL,
+
+  PRIMARY KEY (`post_id`)
+) ENGINE=InnoDB CHARSET=utf8mb4;
